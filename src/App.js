@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Game from "./components/Game";
+import ScanMe from "./components/ScanMe";
+import Three from "./components/Three";
+import Controller from "./components/Controller";
 
 function App() {
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io("https://tender-rockets-battle-92-66-0-136.loca.lt/");
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, [setSocket]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Game socket={socket} />} />
+        <Route path="/scan" element={<ScanMe />} />
+        <Route path="/three" element={<Three socket={socket} />} />
+        <Route path="/controller" element={<Controller socket={socket} />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
