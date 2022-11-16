@@ -11,7 +11,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("https://tender-rockets-battle-92-66-0-136.loca.lt/");
+    const newSocket = io("http://click.tpdev.nl:8000/");
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
