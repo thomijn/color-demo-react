@@ -14,7 +14,7 @@ const ScanMe = () => {
         alignItems: "center",
       }}
     >
-      <QRCode value={`http://click.tpdev.nl/?hash=${hash}`} />
+      <QRCode value={`https://color-demo-react.vercel.app/?hash=${hash}`} />
     </div>
   );
 };
