@@ -15,6 +15,7 @@ const Game = ({ socket }) => {
   useEffect(() => {
     if (search.hash && socket) {
       socket.emit("join_room", search.hash);
+      console.log("joining");
     }
   }, [search, socket]);
 
